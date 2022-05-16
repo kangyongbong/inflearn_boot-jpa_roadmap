@@ -1,7 +1,8 @@
 package jpabook.jpashop;
 
 //import org.junit.Test; <- junit4 전용이라고 한다. junit5로 테스트 하는경우 import org.junit.jupiter.api.Test;로 바꿔야한다.
-import org.assertj.core.api.Assertions;
+
+import jpabook.jpashop.domain.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +24,7 @@ public class MemberRepositoryTest {
     public void testMember() throws Exception {
         //given
         Member member = new Member();
-        member.setUsername("memberA");
+        member.setName("memberA");
 
         //when
         Long saveId = memberRepository.save(member);
@@ -32,7 +33,7 @@ public class MemberRepositoryTest {
         //then
         // junit5
         assertEquals(findMember.getId(), member.getId());
-        assertEquals(findMember.getUsername(), member.getUsername());
+        assertEquals(findMember.getName(), member.getName());
         // 같은 트렌젝션 안에서는 id가 같으면 영속성컨택스트에서 가져온다
         assertEquals(findMember, member);
 
