@@ -29,12 +29,13 @@ public class MemberApiController {
                 .map(m -> new MemberDto(m.getName()))
                 .collect(Collectors.toList());
 
-        return new Result(collect);
+        return new Result(collect.size(), collect);
     }
 
     @Data
     @AllArgsConstructor
     static class Result<T> {
+        private int count;
         private T data;
     }
 
@@ -52,7 +53,7 @@ public class MemberApiController {
     }
 
     @PostMapping("/api/v2/members")
-    public CreateMemberResponse saveMemeber2(@RequestBody @Valid CreateMemberRequest request) {
+    public CreateMemberResponse saveMember2(@RequestBody @Valid CreateMemberRequest request) {
 
         Member member = new Member();
         member.setName(request.getName());
