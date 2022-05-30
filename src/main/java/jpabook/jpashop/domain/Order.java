@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.weaver.ast.Or;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.event.internal.DefaultInitializeCollectionEventListener;
+import org.springframework.boot.autoconfigure.batch.BatchDataSource;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,6 +31,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+//    @BatchSize(size = 1000) 개별적용 ( repository에도 적용 가능 / global로 세팅하는걸 추천)
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
